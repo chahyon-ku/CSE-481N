@@ -1,0 +1,10 @@
+name: cse481
+channels:
+  - pytorch
+  - conda-forge
+  - defaults
+dependencies:
+  - python
+  - transformers
+  - pytorch
+  - cudatoolkit
