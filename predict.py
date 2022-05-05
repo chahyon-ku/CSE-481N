@@ -1,6 +1,6 @@
 import argparse
 import os
-
+import pickle
 import numpy as np
 import torch
 
@@ -21,20 +21,20 @@ parser = argparse.ArgumentParser()
 parser.add_argument('--test-src', type=str, default='data/en-de/test/test.src')
 parser.add_argument('--test-tgt', type=str, default='data/en-de/test/test.mt')
 parser.add_argument('--threshold-tune', type=str)#, default='data/en-de/dev/dev.tags')
-parser.add_argument('--threshold', type=str, default='models/daniel/dev_wwm_mc/threshold.txt')
 
 parser.add_argument('--block-size', type=int, default=512)
 parser.add_argument('--wwm', action='store_true', default=True)
 parser.add_argument('--predict-n', type=int, default=40)
 parser.add_argument('--predict-m', type=int, default=6)
 parser.add_argument('--batch-size', type=int, default=20)
-parser.add_argument('--mc-dropout', action='store_true', default=True)
+parser.add_argument('--mc-dropout', action='store_true', default=False)
 
 parser.add_argument('--checkpoint', type=str, default='models/daniel/')
 
 parser.add_argument('--seed', type=int, default=42)
 
-parser.add_argument('--output-dir', type=str, default='models/daniel/test_wwm_mc/')
+parser.add_argument('--threshold', type=str, default='models/daniel/dev_wwm_nomc/threshold.txt')
+parser.add_argument('--output-dir', type=str, default='models/daniel/test_wwm_nomc/')
 
 args = parser.parse_args()
 print(args)

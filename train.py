@@ -24,8 +24,8 @@ from torch.utils.data import DataLoader
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--train-src', type=str, default='data/en-de/train/train.de')
-parser.add_argument('--train-tgt', type=str, default='data/en-de/train/train.en')
+parser.add_argument('--train-src', type=str, default='data/en-de/train/train.en')
+parser.add_argument('--train-tgt', type=str, default='data/en-de/train/train.de')
 
 parser.add_argument('--dev-src', type=str, default='data/en-de/dev/dev.src')
 parser.add_argument('--dev-tgt', type=str, default='data/en-de/dev/dev.mt')
@@ -44,7 +44,7 @@ parser.add_argument('--train-steps', type=int, default=100000)
 parser.add_argument('--eval-steps', type=int, default=1000)
 parser.add_argument('--learning-rate', type=float, default=5e-5)
 
-parser.add_argument('--pretrained-model-path', type=str, default='mbert')
+parser.add_argument('--pretrained-model-path', type=str, default='bert-base-multilingual-cased')
 parser.add_argument('--save-model-path', type=str, default='models')
 
 parser.add_argument('--seed', type=int, default=42)
