@@ -1,6 +1,9 @@
 # SelfSupervisedQE
 
-Forked from https://github.com/THUNLP-MT/SelfSupervisedQE.
+Forked from https://github.com/THUNLP-MT/SelfSupervisedQE
+to reproduce the paper's experiments as part of the reproducibility
+project for CSE 481 (NLP Capstone) at University of Washington
+during spring quarter of 2022.
 
 Self-Supervised Quality Estimation for Machine Translation
 
