@@ -1,5 +1,7 @@
 # SelfSupervisedQE
 
+Forked from https://github.com/THUNLP-MT/SelfSupervisedQE.
+
 Self-Supervised Quality Estimation for Machine Translation
 
 Please cite:
