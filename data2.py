@@ -6,7 +6,7 @@ import tqdm
 
 from torch.nn.utils.rnn import pad_sequence
 from torch.utils.data.dataset import Dataset
-from utils import make_mask
+from utils2 import make_mask
 
 class TrainDataset(Dataset):
     def __init__(self, src_path, tgt_path, tokenizer, block_size, wwm):

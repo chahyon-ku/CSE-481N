@@ -10,48 +10,120 @@ Team Name: Team TBD
 
 List of Members: Chahyon Ku, Daniel Cheng, Sherry Zhao, Shubhkarman Singh
 
-## Steps
+## Instructions
 
 1. Clone repo
 
+
 2. Install Dependencies (Ours / Author's)
 
-python (3.9.12 / 3.6)
+   ```
+   python (3.9.12 / 3.6)
+   
+   pytorch (1.11.0 / >=1.4.0)
+   
+   transformers (4.11.3 / >=4.4.2)
+   
+   pandas (1.4.2 / >=1.0.5)
+   ```
+3. Download pre-trained multilingual BERT from Hugging Face (https://huggingface.co/bert-base-multilingual-cased)
+   and save it under './bert-base-multilingual-cased/'
 
-pytorch (1.11.0 / >=1.4.0)
 
-transformers (4.11.3 / >=4.4.2)
-
-pandas (1.4.2 / >=1.0.5)
-
-3. Download pre-trained multilingual BERT from Hugging Face (https://huggingface.co/bert-base-multilingual-cased).
-
-4. Fine-tune the model by running python train.py
+4. Fine-tune the model by running train.py
 
     ```
-    python train.py \
-        --train-src', type=str, default='data/en-de/train/train.en')
-        parser.add_argument('--train-tgt', type=str, default='data/en-de/train/train.de')
+    python -u train.py \
+        --train-src 'data/en-de/train/train.en' \
+        --train-tgt 'data/en-de/train/train.de' \
 
-        parser.add_argument('--dev-src', type=str, default='data/en-de/dev/dev.src')
-        parser.add_argument('--dev-tgt', type=str, default='data/en-de/dev/dev.mt')
-        parser.add_argument('--dev-hter', type=str, default='data/en-de/dev/dev.hter')
-        parser.add_argument('--dev-tags', type=str, default='data/en-de/dev/dev.tags')
+        --dev-src 'data/en-de/dev/dev.src' \
+        --dev-tgt 'data/en-de/dev/dev.mt' \
+        --dev-hter 'data/en-de/dev/dev.hter' \
+        --dev-tags 'data/en-de/dev/dev.tags' \
 
-        parser.add_argument('--block-size', type=int, default=256)
-        parser.add_argument('--eval-block-size', type=int, default=512)
-        parser.add_argument('--wwm', action='store_true', default=True)
-        parser.add_argument('--mlm-probability', type=float, default=0.15)
+        --block-size 256 \
+        --eval-block-size 512 \
+        --wwm True \
+        --mlm-probability 0.15 \
 
-        parser.add_argument('--batch-size', type=int, default=8)
-        parser.add_argument('--update-cycle', type=int, default=8)
-        parser.add_argument('--eval-batch-size', type=int, default=8)
-        parser.add_argument('--train-steps', type=int, default=100000)
-        parser.add_argument('--eval-steps', type=int, default=1000)
-        parser.add_argument('--learning-rate', type=float, default=5e-5)
+        --batch-size 128 \
+        --update-cycle 1 \
+        --eval-batch-size 8 \
+        --train-steps 100000
+        --eval-steps 1000 \
+        --learning-rate 5e-5 \
 
-        parser.add_argument('--pretrained-model-path', type=str, default='bert-base-multilingual-cased')
-        parser.add_argument('--save-model-path', type=str, default='models')
+        --pretrained-model-path './bert-base-multilingual-cased/' \
+        --save-model-path './models/en-de/' \
 
-        parser.add_argument('--seed', type=int, default=42)
+        --seed 42
     ```
+   - Above parameters are what the authors of the original paper used to produce results.
+     - Parameters for running extra experiments from our project is saved under ./experiments/*.sh
+   - To reduce batch-size, multiply the update-cycle by the factor to maintain consistent effective batch size.
+     - For example, a batch-size of 16 and update-cycle of 8 would accumulate gradients for 8 batches, and
+       update the weights every 128 data points, simulating a batch size of 128.
+
+
+5. Save predictions and thresholds by running predict.py on dev set
+
+   ```
+   python -u predict.py \
+      --test-src './data/en-de/dev/dev.src' \
+      --test-tgt './data/en-de/dev/dev.mt' \
+      --threshold-tune './data/en-de/dev/dev.tags' \
+   
+      --block-size', type=int, default=512 \
+      --wwm', action='store_true', default=True \
+      --predict-n', type=int, default=40 \
+      --predict-m', type=int, default=6 \
+      --batch-size', type=int, default=20 \
+      --mc-dropout', action='store_true', default=True \
+   
+      --checkpoint './models/en-de/checkpoint_best' \
+   
+      --seed', type=int, default=42 \
+      --output-dir './models/en-de/dev/'
+   
+   ```
+   
+6. Save predictions by running predict.py on test set
+
+   ```
+   python -u predict.py \
+      --test-src './data/en-de/test/test.src' \
+      --test-tgt './data/en-de/test/test.mt' \
+      --threshold' './models/en-de/dev/threshold.txt' \
+   
+      --block-size', type=int, default=512 \
+      --wwm', action='store_true', default=True \
+      --predict-n', type=int, default=40 \
+      --predict-m', type=int, default=6 \
+      --batch-size', type=int, default=20 \
+      --mc-dropout', action='store_true', default=True \
+   
+      --checkpoint './models/en-de/checkpoint_best' \
+   
+      --seed', type=int, default=42 \
+      --output-dir './models/en-de/test/'   
+   ```
+
+7. Compute scores for the predictions by running compute_scores.py
+   
+   ```
+   python -u compute_scores.py \
+      --test-hter './data/en-de/dev/dev.hter' \
+      --test-tags './data/en-de/dev/dev.tags' \
+   
+      --sent-output './models/en-de/dev/sent_output.txt' \
+      --word-output './models/en-de/dev/word_output.txt'
+   
+   python -u compute_scores.py \
+      --test-hter './data/en-de/test/test.hter' \
+      --test-tags './data/en-de/test/test.tags' \
+   
+      --sent-output './models/en-de/test/sent_output.txt' \
+      --word-output './models/en-de/test/word_output.txt'
+   ```
+   - 'Pearson' is the sentence-level metric, F1-OK, F1-BAD, and F1-MUL are the word-level metrics.

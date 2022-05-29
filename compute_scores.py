@@ -39,13 +39,13 @@ def main(args):
 if __name__ == '__main__':
     parser = argparse.ArgumentParser()
 
-    parser.add_argument('--test-hter', type=str, default='data/en-de/dev/dev.hter')
-    parser.add_argument('--test-tags', type=str, default='data/en-de/dev/dev.tags')
+    parser.add_argument('--test-hter', type=str, default='data 20qe/test/test.hter')
+    parser.add_argument('--test-tags', type=str, default='data 20qe/test/test.tags')
 
-    parser.add_argument('--sent-output', type=str, default='models/daniel/dev_wwm_mc/sent_output.txt')
-    parser.add_argument('--word-output', type=str, default='models/daniel/dev_wwm_mc/word_output.txt')
+    parser.add_argument('--sent-output', type=str, default='models/20qe/test/sent_output.txt')
+    parser.add_argument('--word-output', type=str, default='models/20qe/test/word_output.txt')
 
     args = parser.parse_args()
-    print(args)
+    #print(args)
 
     main(args)
