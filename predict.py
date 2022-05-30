@@ -18,9 +18,10 @@ from torch.utils.data import DataLoader
 
 parser = argparse.ArgumentParser()
 
-parser.add_argument('--test-src', type=str, default='data 20qe/test/test.src')
-parser.add_argument('--test-tgt', type=str, default='data 20qe/test/test.mt')
-parser.add_argument('--threshold-tune', type=str)#, default='data 20qe/dev/dev.tags')
+parser.add_argument('--test-src', type=str, default='./data/en-de/dev/dev.src')
+parser.add_argument('--test-tgt', type=str, default='./data/en-de/dev/dev.mt')
+parser.add_argument('--threshold-tune', type=str, default='./data/en-de/dev/dev.tags')
+parser.add_argument('--threshold', type=str)#, default='models/20qe/dev/threshold.txt')
 
 parser.add_argument('--block-size', type=int, default=512)
 parser.add_argument('--wwm', action='store_true', default=True)
@@ -29,12 +30,11 @@ parser.add_argument('--predict-m', type=int, default=6)
 parser.add_argument('--batch-size', type=int, default=20)
 parser.add_argument('--mc-dropout', action='store_true', default=True)
 
-parser.add_argument('--checkpoint', type=str, default='./models/20qe/checkpoint_best')
+parser.add_argument('--checkpoint', type=str, default='./models/en-de/checkpoint_best')
 
 parser.add_argument('--seed', type=int, default=42)
 
-parser.add_argument('--threshold', type=str, default='models/20qe/dev/threshold.txt')
-parser.add_argument('--output-dir', type=str, default='models/20qe/test/')
+parser.add_argument('--output-dir', type=str, default='./models/en-de/dev/')
 
 args = parser.parse_args()
 print(args)
