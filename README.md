@@ -60,7 +60,6 @@ List of Members: Chahyon Ku, Daniel Cheng, Sherry Zhao, Shubhkarman Singh
         --seed 42
     ```
    - Above parameters are what the authors of the original paper used to produce results.
-     - Parameters for running extra experiments from our project is saved under ./experiments/*.sh
    - To reduce batch-size, multiply the update-cycle by the factor to maintain consistent effective batch size.
      - For example, a batch-size of 16 and update-cycle of 8 would accumulate gradients for 8 batches, and
        update the weights every 128 data points, simulating a batch size of 128.
@@ -127,3 +126,9 @@ List of Members: Chahyon Ku, Daniel Cheng, Sherry Zhao, Shubhkarman Singh
       --word-output './models/en-de/test/word_output.txt'
    ```
    - 'Pearson' is the sentence-level metric, F1-OK, F1-BAD, and F1-MUL are the word-level metrics.
+   - Example output for compute_scores.py on dev set
+   ```
+   Pearson: 0.551555
+   F1_OK: 0.923154 F1_Bad: 0.43103825136612023 F1_Mult: 0.39791474390277154
+   ```
+      -
