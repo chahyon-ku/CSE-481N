@@ -1,13 +1,9 @@
 ---
 title: "Reproducing Self-supervised Quality Estimation for Machine Translation"
-description: "Chahyon Ku, Noah Ponto, Muru Zhang, Rachel Soto-Garcia, Karthik Desingh"
+description: "Chahyon Ku, Noah Ponto, Muru Zhang, Rachel Soto-Garcia, Karthik Desingh <br> University of Washington"
 ---
 
-### Table of Contents
-1. [Introduction](#1-introduction)
-2. [Dataset](#2-dataset)
-3. [Model](#3-model)
-4. [Results](#4-results)
-5. [Conclusion](#5-conclusion)
-g
-# 1. Introduction
+# [Paper](./files/cse481n 22sp SelfSupervisedQE Final Report.pdf)
+# [Poster](./files/cse481n final poster selfsupervisedqe.pdf)
+# [Notion](https://phase-desert-07b.notion.site/CSE-481N-304b02f1f43c44d0bc1ccd1c3512ffea)
+# [Google Drive](https://drive.google.com/drive/folders/19fkWcnwPpZP6oY75wKUyMDTLYj8HpDfQ?usp=sharing)
